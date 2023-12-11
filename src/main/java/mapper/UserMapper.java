@@ -16,7 +16,7 @@ public class UserMapper implements Mapper<User, UserDto> {
     }
 
     @Override
-    public UserDto toDo(User user) {
+    public UserDto toDto(User user) {
         return UserDto.builder()
                 .id(user.getId())
                 .name(user.getName())

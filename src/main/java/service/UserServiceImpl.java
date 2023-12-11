@@ -1,5 +1,6 @@
 package service;
 
+import lombok.SneakyThrows;
 import repository.UserRepository;
 import dto.UserDto;
 import entity.User;
@@ -19,26 +20,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getAllUsers() {
         List<User> userList = userRepository.getAllUsers();
-        return userList.stream().map(mapper::toDo).toList();
+        return userList.stream().map(mapper::toDto).toList();
     }
 
     @Override
     public UserDto getUserById(Long id) {
         User user = userRepository.getUserById(id);
-        return mapper.toDo(user);
+        return mapper.toDto(user);
     }
 
     @Override
     public UserDto saveUser(UserDto userDto) {
         User user = mapper.toEntity(userDto);
         User savedUser = userRepository.saveUser(user);
-        return mapper.toDo(savedUser);
+        return mapper.toDto(savedUser);
     }
 
     @Override
     public UserDto updateUser(UserDto userDto) {
-        User user = userRepository.updateUser(mapper.toEntity(userDto));
-        return mapper.toDo(user);
+        User user = mapper.toEntity(userDto);
+        User updatedUser = userRepository.updateUser(user);
+        return mapper.toDto(updatedUser);
     }
 
     @Override

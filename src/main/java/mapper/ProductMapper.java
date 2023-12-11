@@ -15,7 +15,7 @@ public class ProductMapper implements Mapper<Product, ProductDto> {
     }
 
     @Override
-    public ProductDto toDo(Product user) {
+    public ProductDto toDto(Product user) {
         return ProductDto.builder()
                 .id(user.getId())
                 .name(user.getName())

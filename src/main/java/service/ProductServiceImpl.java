@@ -2,6 +2,7 @@ package service;
 
 import dto.ProductDto;
 import entity.Product;
+import entity.User;
 import mapper.Mapper;
 import mapper.ProductMapper;
 import repository.ProductRepository;
@@ -19,26 +20,27 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> getAllProduct() {
         List<Product> productList = productRepository.getAllProducts();
-        return productList.stream().map(mapper::toDo).toList();
+        return productList.stream().map(mapper::toDto).toList();
     }
 
     @Override
     public ProductDto getProductById(Long id) {
         Product product = productRepository.getProductById(id);
-        return mapper.toDo(product);
+        return mapper.toDto(product);
     }
 
     @Override
     public ProductDto saveProduct(ProductDto productDto) {
         Product product = mapper.toEntity(productDto);
         Product savedProduct = productRepository.saveProduct(product);
-        return mapper.toDo(savedProduct);
+        return mapper.toDto(savedProduct);
     }
 
     @Override
     public ProductDto updateProduct(ProductDto productDto) {
-        Product product = productRepository.updateProduct(mapper.toEntity(productDto));
-        return mapper.toDo(product);
+        Product product = mapper.toEntity(productDto);
+        Product updatedProducts = productRepository.updateProduct(product);
+        return mapper.toDto(updatedProducts);
     }
 
     @Override

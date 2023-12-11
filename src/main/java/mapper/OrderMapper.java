@@ -14,7 +14,7 @@ public class OrderMapper implements Mapper<Order, OrderDto>{
     }
 
     @Override
-    public OrderDto toDo(Order user) {
+    public OrderDto toDto(Order user) {
         return OrderDto.builder()
                 .id(user.getId())
                 .name(user.getName())
